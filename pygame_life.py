@@ -1,13 +1,17 @@
 import sys
 import time
+
+from random import randint as ri
 from collections import defaultdict
 from copy import deepcopy
 
 import pygame
 
 from example_grids import gosper_glider
+# from example_grids import random_grid
 from grid_defs import Grid, Neighbours
 
+G_FPS = 5
 
 def get_neighbours(grid: Grid, x: int, y: int) -> Neighbours:
     offsets = [(-1, -1), (0, -1), (1, -1), (-1, 0),
@@ -40,28 +44,67 @@ def draw_grid(screen: pygame.Surface, grid: Grid) -> None:
     cell_width = screen.get_width() / grid.dim.width
     cell_height = screen.get_height() / grid.dim.height
     border_size = 2
-
+    # colour = (ri(40, 255), ri(40, 255), ri(40, 255))
     for (x, y) in grid.cells:
-        pygame.draw.rect(screen, (255, 0, 0), (x * cell_width + border_size, y * cell_height +
+        colour = (ri(20, 235), ri(20, 235), ri(20, 235))
+        # colour = (180, ri(100, 255), 100)
+        pygame.draw.rect(screen, colour, (x * cell_width + border_size, y * cell_height +
                                                border_size, cell_width - border_size, cell_height - border_size))
+
+
+def drawFPS(screen: pygame.Surface, clock: pygame.time.Clock) -> None:
+    """
+    draw FPS
+    """
+    
+    font = pygame.font.SysFont('arial', 24)
+    fps = clock.get_fps()
+
+    # Format the FPS as a string
+    fps_text = f"{fps:.2f} FPS"
+
+    # Render the FPS text
+    fps_surface = font.render(fps_text, True, (255, 255, 255))
+
+    # Get the rect of the FPS text
+    fps_rect = fps_surface.get_rect()
+
+    # Position the FPS text at the top left corner
+    fps_rect.topleft = (40, 20)
+    # fps_rect.topright = (10, 10)
+
+    # Blit the FPS text on the screen
+    screen.blit(fps_surface, fps_rect)
+
+    # Update the display
+    # pygame.display.flip()   
+
+
+
 
 
 def main():
     grid = gosper_glider
+    # grid = random_grid    
 
     pygame.init()
-    screen = pygame.display.set_mode((600, 400))
+    screen = pygame.display.set_mode((800, 800))
+    clock = pygame.time.Clock()
 
     while True:
         if pygame.QUIT in [e.type for e in pygame.event.get()]:
             sys.exit(0)
-
+        
         screen.fill((0, 0, 0))
         draw_grid(screen, grid)
         grid = update_grid(grid)
+        drawFPS(screen, clock)
         pygame.display.flip()
-        time.sleep(0.1)
+        # time.sleep(0.01)
+        clock.tick(G_FPS)
+
 
 
 if __name__ == "__main__":
     main()
+
