@@ -17,6 +17,8 @@ separate virtual environment to your normal development one.
 Create a new environment for this game and install the dependencies with:
 
 ```shell
+python -m venv venv
+. venv/bin/activate
 pip install -r requirements.txt
 ```
 
