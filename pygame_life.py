@@ -4,7 +4,7 @@
 """
 
 import sys
-import time
+# import time
 
 from random import randint as ri
 from collections import defaultdict
@@ -12,15 +12,13 @@ from copy import deepcopy
 
 import pygame
 
-<<<<<<< HEAD
-from example_grids import gosper_glider
-# from example_grids import random_grid
-=======
-from example_grids import GOSPER_GLIDER
->>>>>>> 242271c379ead21a6a30f9c62ebc15c450439afc
+
+# from example_grids import gosper_glider
+from example_grids import random_grid
+
 from grid_defs import Grid, Neighbours
 
-G_FPS = 5
+G_FPS = 10
 
 def get_neighbours(grid: Grid, x: int, y: int) -> Neighbours:
     """
@@ -63,27 +61,18 @@ def draw_grid(screen: pygame.Surface, grid: Grid) -> None:
     cell_width = screen.get_width() / grid.dim.width
     cell_height = screen.get_height() / grid.dim.height
     border_size = 2
-<<<<<<< HEAD
-    # colour = (ri(40, 255), ri(40, 255), ri(40, 255))
+
+    
     for (x, y) in grid.cells:
-        colour = (ri(20, 235), ri(20, 235), ri(20, 235))
+        colour = (ri(40, 255), ri(40, 255), ri(40, 255))
+        # colour = (ri(20, 235), ri(20, 235), ri(20, 235))
         # colour = (180, ri(100, 255), 100)
+
         pygame.draw.rect(screen, colour, (x * cell_width + border_size, y * cell_height +
                                                border_size, cell_width - border_size, cell_height - border_size))
-=======
+        # print(colour)
 
-    for x, y in grid.cells:
-        pygame.draw.rect(
-            screen,
-            (255, 0, 0),
-            (
-                x * cell_width + border_size,
-                y * cell_height + border_size,
-                cell_width - border_size,
-                cell_height - border_size,
-            ),
-        )
->>>>>>> 242271c379ead21a6a30f9c62ebc15c450439afc
+
 
 
 def drawFPS(screen: pygame.Surface, clock: pygame.time.Clock) -> None:
@@ -118,16 +107,9 @@ def drawFPS(screen: pygame.Surface, clock: pygame.time.Clock) -> None:
 
 
 def main():
-<<<<<<< HEAD
-    grid = gosper_glider
-    # grid = random_grid    
-=======
-    """
-        Main entry point
-    """
-    grid = GOSPER_GLIDER
->>>>>>> 242271c379ead21a6a30f9c62ebc15c450439afc
-
+    # grid = gosper_glider
+    grid = random_grid
+    
     pygame.init()
     screen = pygame.display.set_mode((800, 800))
     clock = pygame.time.Clock()
