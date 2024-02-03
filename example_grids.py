@@ -37,7 +37,7 @@ blank_grid = Grid(Dim(70, 70), {(0, 0), (0, 1), (1, 0), (1, 1),
 
 
 
-scr_dim = [80, 80]
+scr_dim = Dim(80, 80)
 dts_quant = max(scr_dim) * min(scr_dim) // 7
 random_set = {(x*2, y*2) for x, y in ((22, 8), (12, 7), (36, 7), (17, 9),
             (11, 8), (1, 9), (25, 4), (2, 8), (16, 7),)}
@@ -56,7 +56,7 @@ def create_rand_set(dots_quantity: int, scr_dimensions: list, *anyset: set) -> s
 random_set = create_rand_set(dts_quant, scr_dim)
 
 
-random_grid = Grid(Dim(scr_dim[0], scr_dim[1]), random_set)
+random_grid = Grid(Dim(scr_dim.width, scr_dim.height), random_set)
 print(dts_quant)
 
 if __name__ == "__main__":
